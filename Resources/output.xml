@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.1 (Python 3.7.7 on darwin)" generated="20200517 00:54:49.402" rpa="false">
+<suite id="s1" name="Test" source="/Users/khwankamolnakbanlang/Desktop/page_speed_insight/robot_exam/Testcases/test.robot">
+<test id="s1-t1" name="Step : Input URL To Analyze">
+<kw name="Go To Pagespeed Insights" type="setup">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>https://developers.google.com/speed/pagespeed/insights</arg>
+<arg>gc</arg>
+</arguments>
+<msg timestamp="20200517 00:54:49.630" level="INFO">Opening browser 'gc' to base url 'https://developers.google.com/speed/pagespeed/insights'.</msg>
+<status status="PASS" starttime="20200517 00:54:49.630" endtime="20200517 00:54:53.098"></status>
+</kw>
+<status status="PASS" starttime="20200517 00:54:49.630" endtime="20200517 00:54:53.098"></status>
+</kw>
+<kw name="Input URL To Analyze">
+<arguments>
+<arg>@{URL_CHECK}</arg>
+</arguments>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<arguments>
+<arg>URL</arg>
+<arg>TYPE</arg>
+<arg>TIME</arg>
+<arg>DATE</arg>
+</arguments>
+<assign>
+<var>${Header}</var>
+</assign>
+<msg timestamp="20200517 00:54:53.100" level="INFO">${Header} = ['URL', 'TYPE', 'TIME', 'DATE']</msg>
+<status status="PASS" starttime="20200517 00:54:53.100" endtime="20200517 00:54:53.100"></status>
+</kw>
+<kw name="${URL} IN [ @{URL_CHECK} ]" type="for">
+<kw name="${URL} = https://www.wemall.com/" type="foritem">
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${txt_url}</arg>
+<arg>${timeout_10m}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:54:53.101" endtime="20200517 00:54:53.125"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${btn_analyze}</arg>
+<arg>${timeout_10m}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:54:53.125" endtime="20200517 00:54:53.142"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${txt_url}</arg>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20200517 00:54:53.143" level="INFO">Typing text 'https://www.wemall.com/' into text field '//input[@class="url label-input-label"]'.</msg>
+<status status="PASS" starttime="20200517 00:54:53.143" endtime="20200517 00:54:53.293"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${btn_analyze}</arg>
+</arguments>
+<msg timestamp="20200517 00:54:53.293" level="INFO">Clicking element '//div[@class="button button-red analyze jfk-button main-submit"]'.</msg>
+<status status="PASS" starttime="20200517 00:54:53.293" endtime="20200517 00:54:53.337"></status>
+</kw>
+<kw name="Click On Tab Desktop">
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${div_desktop_tab}</arg>
+<arg>30</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:54:53.338" endtime="20200517 00:55:13.830"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${div_desktop_tab}</arg>
+</arguments>
+<msg timestamp="20200517 00:55:13.831" level="INFO">Clicking element '//div[@class="goog-tab"]'.</msg>
+<status status="PASS" starttime="20200517 00:55:13.830" endtime="20200517 00:55:13.936"></status>
+</kw>
+<status status="PASS" starttime="20200517 00:54:53.338" endtime="20200517 00:55:13.936"></status>
+</kw>
+<kw name="Show Metric By Lab Data ID">
+<arguments>
+<arg>${URL}</arg>
+<arg>@{LAB_DATA}</arg>
+</arguments>
+<kw name="${lab_data_id} IN [ @{LAB_DATA} ]" type="for">
+<kw name="${lab_data_id} = first-contentful-paint" type="foritem">
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${lbl_lab_data_id}</arg>
+<arg>v_lab_data_id</arg>
+<arg>${lab_data_id}</arg>
+</arguments>
+<assign>
+<var>${locator_lbl_first_contentful_paint}</var>
+</assign>
+<msg timestamp="20200517 00:55:13.938" level="INFO">${locator_lbl_first_contentful_paint} = (//div[contains(@class, "lh-metric lh-metric")][@id="first-contentful-paint"]/div//div[@class="lh-metric__value"])[2]</msg>
+<status status="PASS" starttime="20200517 00:55:13.937" endtime="20200517 00:55:13.938"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+<arg>${timeout_10m}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:13.938" endtime="20200517 00:55:13.970"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200517 00:55:13.994" level="INFO">${resp} = 0.8 s</msg>
+<status status="PASS" starttime="20200517 00:55:13.971" endtime="20200517 00:55:13.994"></status>
+</kw>
+<kw name="Write File To Csv" library="Libwritefile">
+<arguments>
+<arg>${URL}</arg>
+<arg>${lab_data_id}</arg>
+<arg>${resp}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:13.994" endtime="20200517 00:55:13.996"></status>
+</kw>
+<status status="PASS" starttime="20200517 00:55:13.937" endtime="20200517 00:55:13.996"></status>
+</kw>
+<kw name="${lab_data_id} = first-meaningful-paint" type="foritem">
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${lbl_lab_data_id}</arg>
+<arg>v_lab_data_id</arg>
+<arg>${lab_data_id}</arg>
+</arguments>
+<assign>
+<var>${locator_lbl_first_contentful_paint}</var>
+</assign>
+<msg timestamp="20200517 00:55:13.996" level="INFO">${locator_lbl_first_contentful_paint} = (//div[contains(@class, "lh-metric lh-metric")][@id="first-meaningful-paint"]/div//div[@class="lh-metric__value"])[2]</msg>
+<status status="PASS" starttime="20200517 00:55:13.996" endtime="20200517 00:55:13.997"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+<arg>${timeout_10m}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:13.997" endtime="20200517 00:55:14.023"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200517 00:55:14.042" level="INFO">${resp} = 0.8 s</msg>
+<status status="PASS" starttime="20200517 00:55:14.023" endtime="20200517 00:55:14.043"></status>
+</kw>
+<kw name="Write File To Csv" library="Libwritefile">
+<arguments>
+<arg>${URL}</arg>
+<arg>${lab_data_id}</arg>
+<arg>${resp}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:14.043" endtime="20200517 00:55:14.044"></status>
+</kw>
+<status status="PASS" starttime="20200517 00:55:13.996" endtime="20200517 00:55:14.044"></status>
+</kw>
+<kw name="${lab_data_id} = speed-index" type="foritem">
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${lbl_lab_data_id}</arg>
+<arg>v_lab_data_id</arg>
+<arg>${lab_data_id}</arg>
+</arguments>
+<assign>
+<var>${locator_lbl_first_contentful_paint}</var>
+</assign>
+<msg timestamp="20200517 00:55:14.045" level="INFO">${locator_lbl_first_contentful_paint} = (//div[contains(@class, "lh-metric lh-metric")][@id="speed-index"]/div//div[@class="lh-metric__value"])[2]</msg>
+<status status="PASS" starttime="20200517 00:55:14.045" endtime="20200517 00:55:14.045"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+<arg>${timeout_10m}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:14.045" endtime="20200517 00:55:14.065"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200517 00:55:14.089" level="INFO">${resp} = 2.7 s</msg>
+<status status="PASS" starttime="20200517 00:55:14.065" endtime="20200517 00:55:14.089"></status>
+</kw>
+<kw name="Write File To Csv" library="Libwritefile">
+<arguments>
+<arg>${URL}</arg>
+<arg>${lab_data_id}</arg>
+<arg>${resp}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:14.090" endtime="20200517 00:55:14.091"></status>
+</kw>
+<status status="PASS" starttime="20200517 00:55:14.045" endtime="20200517 00:55:14.091"></status>
+</kw>
+<kw name="${lab_data_id} = first-cpu-idle" type="foritem">
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${lbl_lab_data_id}</arg>
+<arg>v_lab_data_id</arg>
+<arg>${lab_data_id}</arg>
+</arguments>
+<assign>
+<var>${locator_lbl_first_contentful_paint}</var>
+</assign>
+<msg timestamp="20200517 00:55:14.092" level="INFO">${locator_lbl_first_contentful_paint} = (//div[contains(@class, "lh-metric lh-metric")][@id="first-cpu-idle"]/div//div[@class="lh-metric__value"])[2]</msg>
+<status status="PASS" starttime="20200517 00:55:14.092" endtime="20200517 00:55:14.092"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+<arg>${timeout_10m}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:14.092" endtime="20200517 00:55:14.116"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200517 00:55:14.135" level="INFO">${resp} = 5.6 s</msg>
+<status status="PASS" starttime="20200517 00:55:14.117" endtime="20200517 00:55:14.135"></status>
+</kw>
+<kw name="Write File To Csv" library="Libwritefile">
+<arguments>
+<arg>${URL}</arg>
+<arg>${lab_data_id}</arg>
+<arg>${resp}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:14.135" endtime="20200517 00:55:14.137"></status>
+</kw>
+<status status="PASS" starttime="20200517 00:55:14.091" endtime="20200517 00:55:14.137"></status>
+</kw>
+<kw name="${lab_data_id} = interactive" type="foritem">
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${lbl_lab_data_id}</arg>
+<arg>v_lab_data_id</arg>
+<arg>${lab_data_id}</arg>
+</arguments>
+<assign>
+<var>${locator_lbl_first_contentful_paint}</var>
+</assign>
+<msg timestamp="20200517 00:55:14.137" level="INFO">${locator_lbl_first_contentful_paint} = (//div[contains(@class, "lh-metric lh-metric")][@id="interactive"]/div//div[@class="lh-metric__value"])[2]</msg>
+<status status="PASS" starttime="20200517 00:55:14.137" endtime="20200517 00:55:14.137"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+<arg>${timeout_10m}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:14.137" endtime="20200517 00:55:14.157"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200517 00:55:14.174" level="INFO">${resp} = 6.6 s</msg>
+<status status="PASS" starttime="20200517 00:55:14.157" endtime="20200517 00:55:14.174"></status>
+</kw>
+<kw name="Write File To Csv" library="Libwritefile">
+<arguments>
+<arg>${URL}</arg>
+<arg>${lab_data_id}</arg>
+<arg>${resp}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:14.174" endtime="20200517 00:55:14.176"></status>
+</kw>
+<status status="PASS" starttime="20200517 00:55:14.137" endtime="20200517 00:55:14.176"></status>
+</kw>
+<kw name="${lab_data_id} = max-potential-fid" type="foritem">
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${lbl_lab_data_id}</arg>
+<arg>v_lab_data_id</arg>
+<arg>${lab_data_id}</arg>
+</arguments>
+<assign>
+<var>${locator_lbl_first_contentful_paint}</var>
+</assign>
+<msg timestamp="20200517 00:55:14.177" level="INFO">${locator_lbl_first_contentful_paint} = (//div[contains(@class, "lh-metric lh-metric")][@id="max-potential-fid"]/div//div[@class="lh-metric__value"])[2]</msg>
+<status status="PASS" starttime="20200517 00:55:14.176" endtime="20200517 00:55:14.177"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until the element ``locator`` is visible.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+<arg>${timeout_10m}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:14.177" endtime="20200517 00:55:14.196"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<arguments>
+<arg>${locator_lbl_first_contentful_paint}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20200517 00:55:14.220" level="INFO">${resp} = 180 ms</msg>
+<status status="PASS" starttime="20200517 00:55:14.196" endtime="20200517 00:55:14.220"></status>
+</kw>
+<kw name="Write File To Csv" library="Libwritefile">
+<arguments>
+<arg>${URL}</arg>
+<arg>${lab_data_id}</arg>
+<arg>${resp}</arg>
+</arguments>
+<status status="PASS" starttime="20200517 00:55:14.220" endtime="20200517 00:55:14.222"></status>
+</kw>
+<status status="PASS" starttime="20200517 00:55:14.176" endtime="20200517 00:55:14.222"></status>
+</kw>
+<status status="PASS" starttime="20200517 00:55:13.937" endtime="20200517 00:55:14.222"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${text}</arg>
+</arguments>
+<msg timestamp="20200517 00:55:14.223" level="FAIL">Variable '${text}' not found.</msg>
+<status status="FAIL" starttime="20200517 00:55:14.222" endtime="20200517 00:55:14.223"></status>
+</kw>
+<status status="FAIL" starttime="20200517 00:55:13.936" endtime="20200517 00:55:14.223"></status>
+</kw>
+<status status="FAIL" starttime="20200517 00:54:53.101" endtime="20200517 00:55:14.223"></status>
+</kw>
+<status status="FAIL" starttime="20200517 00:54:53.100" endtime="20200517 00:55:14.223"></status>
+</kw>
+<status status="FAIL" starttime="20200517 00:54:53.099" endtime="20200517 00:55:14.223"></status>
+</kw>
+<status status="FAIL" starttime="20200517 00:54:49.629" endtime="20200517 00:55:14.224" critical="yes">Variable '${text}' not found.</status>
+</test>
+<kw name="Close All Browsers" library="Selenium2Library" type="teardown">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20200517 00:55:14.225" endtime="20200517 00:55:14.337"></status>
+</kw>
+<status status="FAIL" starttime="20200517 00:54:49.404" endtime="20200517 00:55:14.337"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1">Critical Tests</stat>
+<stat pass="0" fail="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" id="s1" name="Test">Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

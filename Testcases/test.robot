@@ -3,15 +3,20 @@ Library    Selenium2Library
 Library    String
 Library    OperatingSystem
 Library    DateTime
+Library    Collections
+Library    ../Resources/Libwritefile.py
+# Library    ExcelLibrary
+# Library    CSVLibrary
+Library    CSVLib
 Resource    ../Resources/Locators.robot
-Suite Setup    Go To Pagespeed Insights
-Suite Teardown    Close All Browsers
+# Suite Setup    Go To Pagespeed Insights
+# Suite Teardown    Close All Browsers
 
 *** Variables ***
 ${timeout_10m}    10
 #---URL---#
-@{URL_CHECK}    ***URL_1
-   ...   ***URL_2
+@{URL_CHECK}    https://www.wemall.com/
+    ...    https://www.wemall.com/truepoint
 #----Lab Data----#
 @{LAB_DATA}    first-contentful-paint
     ...    first-meaningful-paint
@@ -19,6 +24,7 @@ ${timeout_10m}    10
     ...    first-cpu-idle
     ...    interactive
     ...    max-potential-fid
+${PATH}    /Users/khwankamolnakbanlang/Desktop/page_speed_insight/TestPageSpeedLog.csv
 
 *** Test Cases ***
 Step : Input URL To Analyze
@@ -30,14 +36,28 @@ Go To Pagespeed Insights
 
 Input URL To Analyze
     [Arguments]    @{URL_CHECK}
-    :For    ${URL}    IN    @{URL_CHECK}
-    \    Wait Until Element Is Visible    ${txt_url}    ${timeout_10m}
-    \    Wait Until Element Is Visible    ${btn_analyze}    ${timeout_10m}
-    \    Input Text    ${txt_url}    ${URL}
-    \    Click Element    ${btn_analyze}
-    \    Click On Tab Desktop
-    \    Show Metric By Lab Data ID    ${URL}    @{LAB_DATA}
-    \    Go To Pagespeed Insights
+
+    ${Header}  Create List    URL   TYPE   TIME   DATE
+
+
+    FOR    ${URL}    IN    @{URL_CHECK}
+        Go To Pagespeed Insights
+        Wait Until Element Is Visible    ${txt_url}    ${timeout_10m}
+        Wait Until Element Is Visible    ${btn_analyze}    ${timeout_10m}
+        Input Text    ${txt_url}    ${URL}
+        Click Element    ${btn_analyze}
+        Click On Tab Desktop
+        # Show Metric By Lab Data ID
+        # pure get value
+        # Wait Until Element Is Visible    ${locator_lbl_first_contentful_paint}    ${timeout_10m}
+
+        # implement log file
+        Show Metric By Lab Data ID     ${URL}    @{LAB_DATA}
+        # write file to csv    ${URL}
+
+
+        # Go To Pagespeed Insights
+    END
 
 Click On Tab Desktop
     Wait Until Element Is Visible    ${div_desktop_tab}    30
@@ -45,21 +65,9 @@ Click On Tab Desktop
 
 Show Metric By Lab Data ID
     [Arguments]    ${URL}    @{LAB_DATA}
-    :For    ${lab_data_id}    IN    @{LAB_DATA}
-    \    ${locator_lbl_first_contentful_paint}    Replace String    ${lbl_lab_data_id}    v_lab_data_id    ${lab_data_id}
-    \    Wait Until Element Is Visible    ${locator_lbl_first_contentful_paint}    ${timeout_10m}
-    \    ${text}    Get Text    ${locator_lbl_first_contentful_paint}
-    # \    Log    ${lab_data_id} is ${text}
-    \    ${current_date}    Get Current Date    result_format=datetime
-    # \    Log    ${current_date}
-    # \    Write Variable In File    ${lab_data_id} ${text}\n
-    \    ${existing_lab_data}    Get File    ***FilePath/FileName.txt
-    # \    Log    ${y}
-    \    ${new_lab_data}    Set Variable    ${URL}    ${lab_data_id} ${text} ${current_date}
-    \    ${lab_data}    Set Variable    ${existing_lab_data}${new_lab_data}
-    # \    Log    ${x}
-    \    Write Variable In File    ${lab_data}\n
-
-Write Variable In File
-  [Arguments]  ${variable}
-  Create File  ***FilePath/FileName.txt  ${variable}
+    FOR    ${lab_data_id}    IN    @{LAB_DATA}
+        ${locator_lbl_first_contentful_paint}    Replace String    ${lbl_lab_data_id}    v_lab_data_id    ${lab_data_id}
+        Wait Until Element Is Visible    ${locator_lbl_first_contentful_paint}    ${timeout_10m}
+        ${resp}    Get Text    ${locator_lbl_first_contentful_paint}
+        write file to csv    ${URL}   ${lab_data_id}   ${resp}
+    END
